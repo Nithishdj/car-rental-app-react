@@ -1,0 +1,340 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Admin User",
+      "email": "admin@rent.com",
+      "password": "password123",
+      "role": "admin",
+      "phone": "555-0100"
+    },
+    {
+      "id": "2",
+      "name": "John Doe",
+      "email": "john@example.com",
+      "password": "user123",
+      "role": "user",
+      "phone": "555-0101",
+      "loyaltyPoints": 150
+    },
+    {
+      "id": "3",
+      "name": "Jane Smith",
+      "email": "jane@example.com",
+      "password": "user123",
+      "role": "user",
+      "phone": "555-0102",
+      "loyaltyPoints": 50
+    },
+    {
+      "id": "4",
+      "name": "Nithish",
+      "email": "nithish@gmail.com",
+      "password": "nithish",
+      "phone": "8148015581",
+      "role": "user",
+      "loyaltyPoints": 0,
+      "createdAt": "2026-02-12T16:30:07.397Z"
+    }
+  ],
+  "cars": [
+    {
+      "id": "1",
+      "make": "Toyota",
+      "model": "Corolla",
+      "year": 2023,
+      "category": "Compact",
+      "pricePerDay": 45,
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=500",
+      "transmission": "Automatic",
+      "seats": 5
+    },
+    {
+      "id": "2",
+      "make": "Honda",
+      "model": "Civic",
+      "year": 2024,
+      "category": "Sedans",
+      "pricePerDay": 55,
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1623961990059-28356e22bc9e?auto=format&fit=crop&w=500",
+      "transmission": "Automatic",
+      "seats": 5
+    },
+    {
+      "id": "3",
+      "make": "Ford",
+      "model": "Explorer",
+      "year": 2023,
+      "category": "SUVs",
+      "pricePerDay": 85,
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=500",
+      "transmission": "Automatic",
+      "seats": 7
+    },
+    {
+      "id": "4",
+      "make": "Dodge",
+      "model": "Caravan",
+      "year": 2022,
+      "category": "Vans",
+      "pricePerDay": 90,
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1623565535784-06c07a3c3017?auto=format&fit=crop&w=500",
+      "transmission": "Automatic",
+      "seats": 7
+    },
+    {
+      "id": "5",
+      "make": "Ford",
+      "model": "F-150",
+      "year": 2023,
+      "category": "Trucks",
+      "pricePerDay": 110,
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1587350855729-bab6beeac1ed?auto=format&fit=crop&w=500",
+      "transmission": "Automatic",
+      "seats": 5
+    },
+    {
+      "id": "6",
+      "make": "BMW",
+      "model": "5 Series",
+      "year": 2024,
+      "category": "Luxury",
+      "pricePerDay": 150,
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1555215695-3004980adade?auto=format&fit=crop&w=500",
+      "transmission": "Automatic",
+      "seats": 5
+    },
+    {
+      "id": "7",
+      "make": "Ford",
+      "model": "Mustang",
+      "year": 2023,
+      "category": "Convertibles",
+      "pricePerDay": 130,
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1584345604476-8ec5e12e42dd?auto=format&fit=crop&w=500",
+      "transmission": "Manual",
+      "seats": 4
+    },
+    {
+      "id": "8",
+      "make": "Tesla",
+      "model": "Model 3",
+      "year": 2024,
+      "category": "Electric/Hybrids",
+      "pricePerDay": 100,
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=500",
+      "transmission": "Automatic",
+      "seats": 5
+    },
+    {
+      "id": "9",
+      "make": "Porsche",
+      "model": "911",
+      "year": 2023,
+      "category": "Sports Cars",
+      "pricePerDay": 250,
+      "available": false,
+      "image": "https://images.unsplash.com/photo-1503376763036-066120622c74?auto=format&fit=crop&w=500",
+      "transmission": "Automatic",
+      "seats": 2
+    },
+    {
+      "id": "10",
+      "make": "Harley",
+      "model": "Davidson",
+      "year": 2022,
+      "category": "Motorcycles",
+      "pricePerDay": 70,
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=500",
+      "transmission": "Manual",
+      "seats": 2
+    },
+    {
+      "id": "11",
+      "make": "Chevrolet",
+      "model": "Spark",
+      "year": 2022,
+      "category": "Compact",
+      "pricePerDay": 35,
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1616788494707-ec28f08d05a1?auto=format&fit=crop&w=500",
+      "transmission": "Automatic",
+      "seats": 4
+    },
+    {
+      "id": "12",
+      "make": "Nissan",
+      "model": "Altima",
+      "year": 2023,
+      "category": "Sedans",
+      "pricePerDay": 50,
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1619682817481-e994891cd1f5?auto=format&fit=crop&w=500",
+      "transmission": "Automatic",
+      "seats": 5
+    },
+    {
+      "id": "13",
+      "make": "Jeep",
+      "model": "Wrangler",
+      "year": 2023,
+      "category": "SUVs",
+      "pricePerDay": 95,
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=500",
+      "transmission": "Automatic",
+      "seats": 5
+    },
+    {
+      "id": "14",
+      "make": "Mercedes",
+      "model": "V-Class",
+      "year": 2023,
+      "category": "Vans",
+      "pricePerDay": 140,
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1600569769324-4f25b29b6423?auto=format&fit=crop&w=500",
+      "transmission": "Automatic",
+      "seats": 8
+    },
+    {
+      "id": "15",
+      "make": "Rivian",
+      "model": "R1T",
+      "year": 2024,
+      "category": "Trucks",
+      "pricePerDay": 120,
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1650893113333-6d0295874254?auto=format&fit=crop&w=500",
+      "transmission": "Automatic",
+      "seats": 5
+    },
+    {
+      "id": "16",
+      "make": "Audi",
+      "model": "A8",
+      "year": 2024,
+      "category": "Luxury",
+      "pricePerDay": 160,
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1603584173870-7b299f58938d?auto=format&fit=crop&w=500",
+      "transmission": "Automatic",
+      "seats": 5
+    },
+    {
+      "id": "17",
+      "make": "Mazda",
+      "model": "Miata",
+      "year": 2023,
+      "category": "Convertibles",
+      "pricePerDay": 80,
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1507136566006-cfc505b114fc?auto=format&fit=crop&w=500",
+      "transmission": "Manual",
+      "seats": 2
+    },
+    {
+      "id": "18",
+      "make": "Toyota",
+      "model": "Prius",
+      "year": 2024,
+      "category": "Electric/Hybrids",
+      "pricePerDay": 60,
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1609521263047-f8f205293f24?auto=format&fit=crop&w=500",
+      "transmission": "Automatic",
+      "seats": 5
+    },
+    {
+      "id": "19",
+      "make": "Ferrari",
+      "model": "488",
+      "year": 2022,
+      "category": "Sports Cars",
+      "pricePerDay": 400,
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1592198084033-aade902d1aae?auto=format&fit=crop&w=500",
+      "transmission": "Automatic",
+      "seats": 2
+    },
+    {
+      "id": "20",
+      "make": "Ducati",
+      "model": "Monster",
+      "year": 2023,
+      "category": "Motorcycles",
+      "pricePerDay": 90,
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1615172282427-9a5752d358cd?auto=format&fit=crop&w=500",
+      "transmission": "Manual",
+      "seats": 2
+    },
+    {
+      "id": "21",
+      "make": "Tata",
+      "model": "Punch",
+      "year": 2024,
+      "category": "Sedans",
+      "pricePerDay": 50,
+      "available": true,
+      "image": "img",
+      "transmission": "Automatic",
+      "seats": 5
+    }
+  ],
+  "bookings": [
+    {
+      "id": "1",
+      "userId": 2,
+      "carId": 1,
+      "startDate": "2024-03-01",
+      "endDate": "2024-03-05",
+      "totalPrice": 180,
+      "status": "Completed"
+    },
+    {
+      "id": "2",
+      "userId": 2,
+      "carId": 5,
+      "startDate": "2024-04-10",
+      "endDate": "2024-04-12",
+      "totalPrice": 220,
+      "status": "Completed"
+    },
+    {
+      "id": "3",
+      "userId": "723e",
+      "carId": "5",
+      "carMake": "Ford",
+      "carModel": "F-150",
+      "carImage": "https://images.unsplash.com/photo-1587350855729-bab6beeac1ed?auto=format&fit=crop&w=500",
+      "startDate": "2026-02-26",
+      "endDate": "2026-02-28",
+      "totalPrice": 220,
+      "status": "Completed",
+      "bookedAt": "2026-02-12T16:32:57.915Z"
+    },
+    {
+      "id": "4",
+      "userId": "4",
+      "carId": "10",
+      "carMake": "Harley",
+      "carModel": "Davidson",
+      "carImage": "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=500",
+      "startDate": "2026-02-21",
+      "endDate": "2026-02-22",
+      "totalPrice": 70,
+      "status": "Cancelled",
+      "bookedAt": "2026-02-12T17:03:36.013Z"
+    }
+  ]
+}

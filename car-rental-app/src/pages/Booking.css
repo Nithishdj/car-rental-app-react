@@ -1,0 +1,119 @@
+.booking-page {
+  padding: 2rem 20px;
+}
+
+.booking-page h1 {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--primary-color);
+}
+
+.booking-container {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr; /* Car summary takes more space, Form takes less */
+  gap: 3rem;
+  align-items: start;
+}
+
+/* Car Summary (Left) */
+.car-summary {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.car-summary img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+}
+
+.summary-details {
+  padding: 2rem;
+}
+
+.summary-details h2 { margin-bottom: 0.5rem; }
+.summary-details .category { 
+  color: var(--secondary-color); 
+  font-weight: bold; 
+  margin-bottom: 1rem; 
+}
+
+.summary-details .price-tag {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-top: 1.5rem;
+}
+
+.summary-details .price-tag span {
+  font-size: 1rem;
+  color: var(--text-light);
+  font-weight: normal;
+}
+
+/* Booking Form (Right) */
+.booking-form-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  position: sticky;
+  top: 100px; /* Sticks when scrolling */
+}
+
+.booking-form-card h3 { margin-bottom: 1.5rem; }
+
+.form-group { margin-bottom: 1.5rem; }
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.price-summary {
+  background: #f9fafb;
+  padding: 1rem;
+  border-radius: 6px;
+  margin: 1.5rem 0;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.price-row.total {
+  border-top: 1px solid #ddd;
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+}
+
+.error-message {
+  color: var(--danger);
+  background: #fee2e2;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .booking-container {
+    grid-template-columns: 1fr;
+  }
+}
