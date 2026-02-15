@@ -1,71 +1,115 @@
 import React from 'react';
-import './About.css';
+import './About.css'; 
+
+// --- IMPORT IMAGES ---
+import founder1 from '../assets/nd.png';
+import founder2 from '../assets/jf.png';
+import founder3 from '../assets/sr.png';
+import founder4 from '../assets/s.png';
 
 const About = () => {
+  // Data: Founders
+  const founders = [
+    { id: 1, name: 'Nithish', role: 'CEO & Founder', image: founder1, bio: 'Visionary leader revolutionizing urban mobility.' },
+    { id: 2, name: 'Jaffrin', role: 'CTO', image: founder2, bio: 'Tech wizard ensuring seamless booking experiences.' },
+    { id: 3, name: 'Shankar', role: 'Operations Head', image: founder3, bio: 'Keeping our fleet in pristine condition 24/7.' },
+    { id: 4, name: 'Saran', role: 'Marketing Lead', image: founder4, bio: 'Connecting our brand with the people of Chennai.' }
+  ];
+
+  // Data: Reviews
+  const reviews = [
+    { id: 1, name: "Kaushik V.", comment: "Best rental service in Chennai! The cars are brand new.", rating: "⭐⭐⭐⭐⭐" },
+    { id: 2, name: "Kishore S.", comment: "Super affordable and the support team is very helpful.", rating: "⭐⭐⭐⭐⭐" },
+    { id: 3, name: "Andrew G.", comment: "Love the zero-deposit policy. Highly recommended!", rating: "⭐⭐⭐⭐" }
+  ];
+
   return (
-    <div className="about-page">
-      {/* Header */}
-      <div className="about-header">
-        <div className="container">
-          <h1>About Us</h1>
-          <p>We provide top-notch car rental services with a focus on customer satisfaction.</p>
+    <div className="about-container">
+      {/* 1. HERO SECTION */}
+      <div className="about-hero">
+        <h1>About AutoRent</h1>
+        <p>Your Journey, Our Priority.</p>
+      </div>
+
+      {/* 2. MISSION & VISION */}
+      <div className="mission-section">
+        <h2>Our Mission</h2>
+        <p>
+          To provide accessible, affordable, and safe self-drive car rentals to everyone. 
+          We believe in freedom of movement without the hassle of ownership.
+        </p>
+      </div>
+
+      {/* 3. WHY CHOOSE US (More Options) */}
+      <div className="features-section">
+        <h2>Why Choose AutoRent?</h2>
+        <div className="features-grid">
+          <div className="feature-card">
+            <h3>🚀 Fast Booking</h3>
+            <p>Book a car in less than 2 minutes with our instant approval system.</p>
+          </div>
+          <div className="feature-card">
+            <h3>💰 Best Rates</h3>
+            <p>Unbeatable daily rates with no hidden charges or surge pricing.</p>
+          </div>
+          <div className="feature-card">
+            <h3>🛡️ 24/7 Support</h3>
+            <p>Roadside assistance and customer support whenever you need us.</p>
+          </div>
+          <div className="feature-card">
+            <h3>✨ Well Maintained</h3>
+            <p>Every car is sanitized and serviced before delivery.</p>
+          </div>
         </div>
       </div>
 
-      <div className="container about-content">
-        {/* Map Section */}
-        <div className="map-section">
-          <h2>Find Us</h2>
-          <div className="map-container">
-            <iframe 
-              title="Google Map"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.184126372554!2d-73.9877312845941!3d40.74844057932764!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1629783547925!5m2!1sen!2sus" 
-              width="100%" 
-              height="450" 
-              style={{border:0}} 
-              allowFullScreen="" 
-              loading="lazy"
-            ></iframe>
-          </div>
-        </div>
-
-        {/* Team Section */}
-        <div className="team-section">
-          <h2>Meet Our Team</h2>
-          <div className="team-grid">
-            <div className="team-member">
-              <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="CEO" />
-              <h3>John Doe</h3>
-              <p>CEO & Founder</p>
+      {/* 4. FOUNDERS SECTION */}
+      <div className="founders-section">
+        <h2>Meet the Founders</h2>
+        <div className="founders-grid">
+          {founders.map((founder) => (
+            <div className="founder-card" key={founder.id}>
+              <div className="image-wrapper">
+                <img src={founder.image} alt={founder.name} />
+              </div>
+              <h3>{founder.name}</h3>
+              <p className="role">{founder.role}</p>
+              <p className="bio">{founder.bio}</p>
             </div>
-            <div className="team-member">
-              <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Manager" />
-              <h3>Jane Smith</h3>
-              <p>Fleet Manager</p>
-            </div>
-            <div className="team-member">
-              <img src="https://randomuser.me/api/portraits/men/86.jpg" alt="Support" />
-              <h3>Mike Johnson</h3>
-              <p>Customer Support</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Testimonials */}
-        <div className="testimonials-section">
-          <h2>Customer Reviews</h2>
-          <div className="testimonial-grid">
-            <div className="testimonial-card">
-              <p>"Great service and excellent cars. The booking process was smooth and easy."</p>
-              <h4>- Sarah L.</h4>
-            </div>
-            <div className="testimonial-card">
-              <p>"Very satisfied with the rental experience. The car was clean and new."</p>
-              <h4>- Mark T.</h4>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
+
+      {/* 5. CUSTOMER REVIEWS */}
+      <div className="reviews-section">
+        <h2>What Our Customers Say</h2>
+        <div className="reviews-grid">
+          {reviews.map((review) => (
+            <div className="review-card" key={review.id}>
+              <div className="stars">{review.rating}</div>
+              <p>"{review.comment}"</p>
+              <h4>- {review.name}</h4>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 6. MAP LOCATION */}
+      <div className="map-section">
+        <h2>Find Us Here</h2>
+        <div className="map-container">
+          <iframe 
+            title="AutoRent Location"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12987.813897854787!2d80.22153449947513!3d12.826104184716367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525a688f3d32f1%3A0x769131751ee5a50e!2sChangepond%20Technologies!5e1!3m2!1sen!2sin!4v1771147958913!5m2!1sen!2sin" 
+            width="100%" 
+            height="400" 
+            style={{ border: 0 }} 
+            allowFullScreen="" 
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+
     </div>
   );
 };

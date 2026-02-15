@@ -9,7 +9,7 @@ const Footer = () => {
         
         {/* Section 1: Brand */}
         <div className="footer-section">
-          <h2>AutoRent</h2>
+          <h2>ChennaiRents</h2>
           <p>
             Drive your dream car today. We provide the best service with affordable prices and a wide range of vehicles.
           </p>
@@ -40,9 +40,9 @@ const Footer = () => {
         {/* Section 4: Contact */}
         <div className="footer-section">
           <h3>Contact Us</h3>
-          <p><FaMapMarkerAlt /> 123 Main Street, Cityville</p>
-          <p><FaPhone /> +1 234 567 8900</p>
-          <p><FaEnvelope /> support@autorent.com</p>
+          <p><FaMapMarkerAlt /> 231 siruseri, ChennaiRents</p>
+          <p><FaPhone /> +91 81480 14481</p>
+          <p><FaEnvelope /> support@chennairents.com</p>
           <div className="social-icons">
             <FaFacebook /> <FaTwitter /> <FaInstagram /> <FaLinkedin />
           </div>
@@ -50,7 +50,7 @@ const Footer = () => {
       </div>
       
       <div className="footer-bottom">
-        <p>&copy; {new Date().getFullYear()} AutoRent. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} ChennaiRents. All rights reserved.</p>
       </div>
     </footer>
   );

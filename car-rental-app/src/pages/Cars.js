@@ -84,10 +84,10 @@ const Cars = () => {
     <div className="cars-page container">
       <div className="cars-header">
         <h1>Our Vehicle Fleet</h1>
-        {/* DEBUGGING INFO - Remove this after fixing */}
-        <p style={{fontSize: '0.8rem', color: 'red'}}>
+        {/* DEBUGGING INFO - Remove this after fixing
+        <p style={{fontSize: '0.8rem', color: 'blue'}}>
           Debug: Loaded {cars.length} cars. Showing {filteredCars.length}.
-        </p>
+        </p> */}
       </div>
 
       <div className="filter-bar">

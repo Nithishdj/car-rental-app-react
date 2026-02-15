@@ -1,138 +1,176 @@
 import React, { useState, useEffect } from 'react';
-import api from '../api/axios';
 import { useAuth } from '../context/AuthContext';
-import { FaUser, FaHistory, FaStar, FaCalendarAlt } from 'react-icons/fa';
+import api from '../api/axios';
+import { FaUser, FaEnvelope, FaPhone, FaCalendarAlt, FaStar, FaEdit, FaSave, FaTimes, FaCar } from 'react-icons/fa';
 import './UserDashboard.css';
 
 const UserDashboard = () => {
   const { user } = useAuth();
-  const [bookings, setBookings] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [bookings, setBookings] = useState([]); // State for bookings
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('history'); // 'profile' or 'history'
+  
+  // Profile Form State
+  const [formData, setFormData] = useState({
+    username: user?.username || '',
+    email: user?.email || '',
+    phone: user?.phone || '',
+  });
 
+  // Fetch Bookings on Load
   useEffect(() => {
-    if (user) {
-      fetchUserBookings();
-    }
+    const fetchBookings = async () => {
+      if (user?.id) {
+        try {
+          // Fetch only bookings for this user
+          const res = await api.get(`/bookings?userId=${user.id}`);
+          setBookings(res.data);
+        } catch (err) {
+          console.error("Error fetching bookings:", err);
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+    fetchBookings();
   }, [user]);
 
-  const fetchUserBookings = async () => {
-    try {
-      // JSON Server supports filtering by userId
-      const response = await api.get(`/bookings?userId=${user.id}`);
-      setBookings(response.data);
-      setLoading(false);
-    } catch (err) {
-      console.error("Error fetching bookings:", err);
-      setLoading(false);
-    }
+  // Format Date Helper
+  const formatDate = (dateString) => {
+    if (!dateString) return 'N/A';
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric', month: 'short', day: 'numeric'
+    });
   };
 
-  const cancelBooking = async (bookingId) => {
-    if (window.confirm('Are you sure you want to cancel this booking?')) {
-      try {
-        await api.delete(`/bookings/${bookingId}`);
-        // Refresh list after delete
-        setBookings(bookings.filter(b => b.id !== bookingId));
-        alert('Booking cancelled successfully.');
-      } catch (err) {
-        alert('Failed to cancel booking.');
+  // Handle Input Changes
+ // Handle Input Changes (Dashboard Edit)
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === 'phone') {
+      const numericValue = value.replace(/\D/g, ''); // Remove non-numbers
+      if (numericValue.length <= 10) {
+        setFormData({ ...formData, [name]: numericValue });
       }
+    } else {
+      setFormData({ ...formData, [name]: value });
     }
   };
 
-  if (loading) return <div className="loading">Loading dashboard...</div>;
+  // Handle Save Profile
+  const handleSave = async () => {
+    try {
+      await api.patch(`/users/${user.id}`, {
+        username: formData.username,
+        phone: formData.phone
+      });
+      const updatedUser = { ...user, username: formData.username, phone: formData.phone };
+      sessionStorage.setItem('carRentalUser', JSON.stringify(updatedUser));
+      window.location.reload(); 
+    } catch (err) {
+      alert('Failed to update profile.');
+    }
+  };
+
+  if (!user) return <div className="loading">Loading profile...</div>;
 
   return (
     <div className="dashboard-container">
-      {/* Sidebar Navigation */}
-      <div className="dashboard-sidebar">
-        <div className="user-profile-summary">
-          <div className="avatar-circle">{user.name.charAt(0)}</div>
-          <h3>{user.name}</h3>
-          <p>Loyalty Member</p>
-        </div>
-        
-        <nav className="dashboard-nav">
-          <button 
-            className={activeTab === 'profile' ? 'active' : ''} 
-            onClick={() => setActiveTab('profile')}
-          >
-            <FaUser /> My Profile
-          </button>
-          <button 
-            className={activeTab === 'history' ? 'active' : ''} 
-            onClick={() => setActiveTab('history')}
-          >
-            <FaHistory /> Rental History
-          </button>
-          <div className="loyalty-badge">
-            <FaStar /> {user.loyaltyPoints || 0} Points
-          </div>
-        </nav>
+      <div className="dashboard-header">
+        <h1>My Dashboard</h1>
+        <p>Manage your profile and view booking history</p>
       </div>
 
-      {/* Main Content Area */}
-      <div className="dashboard-content">
-        {activeTab === 'profile' && (
-          <div className="content-section">
-            <h2>My Profile</h2>
-            <div className="profile-details card">
-              <div className="detail-row">
-                <label>Full Name:</label>
-                <span>{user.name}</span>
-              </div>
-              <div className="detail-row">
-                <label>Email:</label>
-                <span>{user.email}</span>
-              </div>
-              <div className="detail-row">
-                <label>Phone:</label>
-                <span>{user.phone || 'N/A'}</span>
-              </div>
-              <div className="detail-row">
-                <label>Member Since:</label>
-                <span>{new Date(user.createdAt || Date.now()).toLocaleDateString()}</span>
-              </div>
+      {/* --- SECTION 1: PROFILE DETAILS --- */}
+      <div className="profile-table-container">
+        <div className="table-header-row">
+          <h2>Profile Details</h2>
+          {!isEditing ? (
+            <button className="btn-action edit" onClick={() => setIsEditing(true)}>
+              <FaEdit /> Edit
+            </button>
+          ) : (
+            <div className="action-buttons">
+              <button className="btn-action cancel" onClick={() => setIsEditing(false)}>
+                <FaTimes /> Cancel
+              </button>
+              <button className="btn-action save" onClick={handleSave}>
+                <FaSave /> Save
+              </button>
             </div>
-          </div>
-        )}
+          )}
+        </div>
 
-        {activeTab === 'history' && (
-          <div className="content-section">
-            <h2>Rental History</h2>
-            {bookings.length === 0 ? (
-              <p>You haven't booked any cars yet.</p>
-            ) : (
-              <div className="bookings-list">
-                {bookings.map(booking => (
-                  <div key={booking.id} className="booking-card">
-                    <img src={booking.carImage} alt="Car" className="booking-img" />
-                    <div className="booking-info">
-                      <h3>{booking.carMake} {booking.carModel}</h3>
-                      <div className="booking-dates">
-                        <FaCalendarAlt /> 
-                        {booking.startDate} to {booking.endDate}
+        <table className="profile-table">
+          <tbody>
+            <tr>
+              <td className="label-col"><FaUser className="icon" /> Full Name</td>
+              <td className="value-col">
+                {isEditing ? <input name="username" value={formData.username} onChange={handleChange} className="edit-input" /> : user.username || user.fullname}
+              </td>
+            </tr>
+            <tr>
+              <td className="label-col"><FaEnvelope className="icon" /> Email</td>
+              <td className="value-col">{user.email}</td>
+            </tr>
+            <tr>
+              <td className="label-col"><FaPhone className="icon" /> Phone</td>
+              <td className="value-col">
+                {isEditing ? <input name="phone" value={formData.phone} onChange={handleChange} className="edit-input" placeholder="Add phone" /> : user.phone || 'N/A'}
+              </td>
+            </tr>
+            <tr className="loyalty-row">
+              <td className="label-col"><FaStar className="icon star" /> Points</td>
+              <td className="value-col points-value">{user.loyaltyPoints || 0} Points</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      {/* --- SECTION 2: BOOKING HISTORY --- */}
+      <div className="bookings-section">
+        <h2>Booking History</h2>
+        
+        {loading ? (
+          <p>Loading bookings...</p>
+        ) : bookings.length > 0 ? (
+          <div className="bookings-table-wrapper">
+            <table className="bookings-table">
+              <thead>
+                <tr>
+                  <th>Car</th>
+                  <th>Dates</th>
+                  <th>Total Price</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {bookings.map((booking) => (
+                  <tr key={booking.id}>
+                    <td>
+                      <div className="booking-car-info">
+                        <FaCar className="car-icon" />
+                        <span>{booking.carMake} {booking.carModel}</span>
                       </div>
-                      <span className={`status-badge ${booking.status.toLowerCase()}`}>
+                    </td>
+                    <td>
+                      {formatDate(booking.startDate)} - {formatDate(booking.endDate)}
+                    </td>
+                    <td className="price-cell">${booking.totalPrice}</td>
+                    <td>
+                      <span className={`status-badge ${booking.status?.toLowerCase()}`}>
                         {booking.status}
                       </span>
-                    </div>
-                    <div className="booking-actions">
-                      <p className="total-price">${booking.totalPrice}</p>
-                      {booking.status === 'Upcoming' && (
-                        <button 
-                          className="btn btn-danger btn-sm"
-                          onClick={() => cancelBooking(booking.id)}
-                        >
-                          Cancel
-                        </button>
-                      )}
-                    </div>
-                  </div>
+                    </td>
+                  </tr>
                 ))}
-              </div>
-            )}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <div className="empty-state">
+            <p>You haven't made any bookings yet.</p>
           </div>
         )}
       </div>

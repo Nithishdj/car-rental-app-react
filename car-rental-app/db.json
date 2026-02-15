@@ -6,7 +6,8 @@
       "email": "admin@rent.com",
       "password": "password123",
       "role": "admin",
-      "phone": "555-0100"
+      "phone": "555-0100",
+      "loyaltyPoints": 12
     },
     {
       "id": "2",
@@ -31,10 +32,42 @@
       "name": "Nithish",
       "email": "nithish@gmail.com",
       "password": "nithish",
-      "phone": "8148015581",
+      "phone": "12345556",
+      "role": "user",
+      "loyaltyPoints": 26,
+      "createdAt": "2026-02-12T16:30:07.397Z",
+      "username": "Nithish"
+    },
+    {
+      "id": "5",
+      "name": "jaffrin farhan C",
+      "email": "jaff1223@gmail.com",
+      "password": "JAFF123",
+      "phone": "8777765555444444",
       "role": "user",
       "loyaltyPoints": 0,
-      "createdAt": "2026-02-12T16:30:07.397Z"
+      "createdAt": "2026-02-13T04:18:53.830Z"
+    },
+    {
+      "id": "6",
+      "name": "tiru",
+      "email": "tiru@g",
+      "password": "123456",
+      "phone": "08149015581",
+      "role": "user",
+      "loyaltyPoints": 0,
+      "createdAt": "2026-02-13T04:59:46.180Z"
+    },
+    {
+      "id": "7",
+      "name": "Ahalya",
+      "email": "ahalya@gmail.com",
+      "password": "ahalya123",
+      "phone": "12345678",
+      "role": "user",
+      "loyaltyPoints": 0,
+      "createdAt": "2026-02-15T09:44:06.134Z",
+      "username": "Ahalya"
     }
   ],
   "cars": [
@@ -43,10 +76,10 @@
       "make": "Toyota",
       "model": "Corolla",
       "year": 2023,
-      "category": "Compact",
-      "pricePerDay": 45,
+      "category": "Luxury",
+      "pricePerDay": "65",
       "available": true,
-      "image": "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=500",
+      "image": "https://www.carscoops.com/wp-content/uploads/2024/09/2025-Toyota-Corolla-8.jpg",
       "transmission": "Automatic",
       "seats": 5
     },
@@ -58,7 +91,7 @@
       "category": "Sedans",
       "pricePerDay": 55,
       "available": true,
-      "image": "https://images.unsplash.com/photo-1623961990059-28356e22bc9e?auto=format&fit=crop&w=500",
+      "image": "https://tse3.mm.bing.net/th/id/OIP.HJTpbkZaNDKHGNh7S1BR4QAAAA?cb=defcachec2&rs=1&pid=ImgDetMain&o=7&rm=3",
       "transmission": "Automatic",
       "seats": 5
     },
@@ -70,7 +103,7 @@
       "category": "SUVs",
       "pricePerDay": 85,
       "available": true,
-      "image": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=500",
+      "image": "https://tse1.mm.bing.net/th/id/OIP.onSXzAHU2cbyPjuREWASVAHaE8?cb=defcachec2&rs=1&pid=ImgDetMain&o=7&rm=3",
       "transmission": "Automatic",
       "seats": 7
     },
@@ -82,7 +115,7 @@
       "category": "Vans",
       "pricePerDay": 90,
       "available": true,
-      "image": "https://images.unsplash.com/photo-1623565535784-06c07a3c3017?auto=format&fit=crop&w=500",
+      "image": "https://tse3.mm.bing.net/th/id/OIP.s7VYaFZlpqmCjyhEBaKWJAHaFj?cb=defcachec2&rs=1&pid=ImgDetMain&o=7&rm=3",
       "transmission": "Automatic",
       "seats": 7
     },
@@ -94,7 +127,7 @@
       "category": "Trucks",
       "pricePerDay": 110,
       "available": true,
-      "image": "https://images.unsplash.com/photo-1587350855729-bab6beeac1ed?auto=format&fit=crop&w=500",
+      "image": "https://static0.carbuzzimages.com/wordpress/wp-content/uploads/2024/04/f-150-lightning-flash-1-2.jpg",
       "transmission": "Automatic",
       "seats": 5
     },
@@ -106,7 +139,7 @@
       "category": "Luxury",
       "pricePerDay": 150,
       "available": true,
-      "image": "https://images.unsplash.com/photo-1555215695-3004980adade?auto=format&fit=crop&w=500",
+      "image": "https://tse3.mm.bing.net/th/id/OIP.Ctl-z4oLdUV68J3ZKw-jyAHaEn?cb=defcachec2&rs=1&pid=ImgDetMain&o=7&rm=3",
       "transmission": "Automatic",
       "seats": 5
     },
@@ -142,7 +175,7 @@
       "category": "Sports Cars",
       "pricePerDay": 250,
       "available": false,
-      "image": "https://images.unsplash.com/photo-1503376763036-066120622c74?auto=format&fit=crop&w=500",
+      "image": "https://tse3.mm.bing.net/th/id/OIP.zsjCGE4x5k8nlJNIo-l10AHaEK?cb=defcachec2&rs=1&pid=ImgDetMain&o=7&rm=3",
       "transmission": "Automatic",
       "seats": 2
     },
@@ -166,7 +199,7 @@
       "category": "Compact",
       "pricePerDay": 35,
       "available": true,
-      "image": "https://images.unsplash.com/photo-1616788494707-ec28f08d05a1?auto=format&fit=crop&w=500",
+      "image": "https://tse2.mm.bing.net/th/id/OIP.rHLoCirKIiPDow6uUj0TeAHaEK?cb=defcachec2&rs=1&pid=ImgDetMain&o=7&rm=3",
       "transmission": "Automatic",
       "seats": 4
     },
@@ -190,7 +223,7 @@
       "category": "SUVs",
       "pricePerDay": 95,
       "available": true,
-      "image": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=500",
+      "image": "https://tse2.mm.bing.net/th/id/OIP.0WLb8OWqamhevxJMcn49-QHaEK?cb=defcachec2&rs=1&pid=ImgDetMain&o=7&rm=3",
       "transmission": "Automatic",
       "seats": 5
     },
@@ -202,7 +235,7 @@
       "category": "Vans",
       "pricePerDay": 140,
       "available": true,
-      "image": "https://images.unsplash.com/photo-1600569769324-4f25b29b6423?auto=format&fit=crop&w=500",
+      "image": "https://tse1.mm.bing.net/th/id/OIP.iP1okolP6Cy6c7LDhnD2DQHaE8?cb=defcachec2&rs=1&pid=ImgDetMain&o=7&rm=3",
       "transmission": "Automatic",
       "seats": 8
     },
@@ -214,7 +247,7 @@
       "category": "Trucks",
       "pricePerDay": 120,
       "available": true,
-      "image": "https://images.unsplash.com/photo-1650893113333-6d0295874254?auto=format&fit=crop&w=500",
+      "image": "https://tse2.mm.bing.net/th/id/OIP.NNvaYOJ02yn-vednI9ByRwHaD2?cb=defcachec2&rs=1&pid=ImgDetMain&o=7&rm=3",
       "transmission": "Automatic",
       "seats": 5
     },
@@ -226,7 +259,7 @@
       "category": "Luxury",
       "pricePerDay": 160,
       "available": true,
-      "image": "https://images.unsplash.com/photo-1603584173870-7b299f58938d?auto=format&fit=crop&w=500",
+      "image": "https://tse1.mm.bing.net/th/id/OIP.ZK7S0Bfdp8HszP57Cc3_nwHaEa?cb=defcachec2&rs=1&pid=ImgDetMain&o=7&rm=3",
       "transmission": "Automatic",
       "seats": 5
     },
@@ -274,7 +307,7 @@
       "category": "Motorcycles",
       "pricePerDay": 90,
       "available": true,
-      "image": "https://images.unsplash.com/photo-1615172282427-9a5752d358cd?auto=format&fit=crop&w=500",
+      "image": "https://motofomo.com/wp-content/uploads/2022/12/Ducati-Monster-797-Studio-white-RHS-diagonal-white-1024x744.jpg",
       "transmission": "Manual",
       "seats": 2
     },
@@ -286,7 +319,19 @@
       "category": "Sedans",
       "pricePerDay": 50,
       "available": true,
-      "image": "img",
+      "image": "https://tse4.mm.bing.net/th/id/OIP.FK8z2G5Wax5Vddek3scq5wHaEK?cb=defcachec2&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "transmission": "Automatic",
+      "seats": 5
+    },
+    {
+      "id": "22",
+      "make": "Honda",
+      "model": "Civic",
+      "year": 2024,
+      "category": "Sedans",
+      "pricePerDay": "62",
+      "available": true,
+      "image": "https://tse3.mm.bing.net/th/id/OIP.pMdtPucwdMDU1nzcs-VGTwHaE8?cb=defcachec2&w=850&h=567&rs=1&pid=ImgDetMain&o=7&rm=3",
       "transmission": "Automatic",
       "seats": 5
     }
@@ -335,6 +380,156 @@
       "totalPrice": 70,
       "status": "Cancelled",
       "bookedAt": "2026-02-12T17:03:36.013Z"
+    },
+    {
+      "id": "5",
+      "userId": "5",
+      "carId": "1",
+      "carMake": "Toyota",
+      "carModel": "Corolla",
+      "carImage": "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=500",
+      "startDate": "2026-02-13",
+      "endDate": "2026-02-14",
+      "totalPrice": 45,
+      "status": "Completed",
+      "bookedAt": "2026-02-13T04:19:25.569Z"
+    },
+    {
+      "id": "6",
+      "userId": "6",
+      "carId": "16",
+      "carMake": "Audi",
+      "carModel": "A8",
+      "carImage": "https://images.unsplash.com/photo-1603584173870-7b299f58938d?auto=format&fit=crop&w=500",
+      "startDate": "2026-02-26",
+      "endDate": "2026-02-27",
+      "totalPrice": 160,
+      "status": "Completed",
+      "bookedAt": "2026-02-13T05:00:37.432Z"
+    },
+    {
+      "id": "7",
+      "userId": "4",
+      "totalPrice": 180,
+      "status": "Completed",
+      "bookedAt": "2026-02-13T05:07:09.300Z"
+    },
+    {
+      "id": "8",
+      "userId": "4",
+      "carId": "2",
+      "carMake": "Honda",
+      "carModel": "Civic",
+      "carImage": "https://images.unsplash.com/photo-1623961990059-28356e22bc9e?auto=format&fit=crop&w=500",
+      "startDate": "2026-02-14",
+      "endDate": "2026-02-15",
+      "totalPrice": 54,
+      "status": "Completed",
+      "bookedAt": "2026-02-13T06:30:21.893Z"
+    },
+    {
+      "id": "9",
+      "userId": "1",
+      "carId": "11",
+      "carMake": "Chevrolet",
+      "carModel": "Spark",
+      "carImage": "https://images.unsplash.com/photo-1616788494707-ec28f08d05a1?auto=format&fit=crop&w=500",
+      "startDate": "2026-02-14",
+      "endDate": "2026-02-15",
+      "totalPrice": 35,
+      "status": "Completed",
+      "bookedAt": "2026-02-13T06:41:01.588Z"
+    },
+    {
+      "id": "10",
+      "userId": "4",
+      "carId": "10",
+      "carMake": "Harley",
+      "carModel": "Davidson",
+      "carImage": "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=500",
+      "startDate": "2026-02-14",
+      "endDate": "2026-02-15",
+      "totalPrice": 69,
+      "status": "Cancelled",
+      "bookedAt": "2026-02-13T08:30:09.539Z"
+    },
+    {
+      "id": "11",
+      "userId": "4",
+      "carId": "4",
+      "carMake": "Dodge",
+      "carModel": "Caravan",
+      "carImage": "https://tse3.mm.bing.net/th/id/OIP.s7VYaFZlpqmCjyhEBaKWJAHaFj?cb=defcachec2&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "startDate": "2026-02-15",
+      "endDate": "2026-02-16",
+      "totalPrice": 90,
+      "status": "Completed",
+      "bookedAt": "2026-02-13T08:32:05.401Z"
+    },
+    {
+      "id": "12",
+      "userId": "4",
+      "carId": "7",
+      "carMake": "Ford",
+      "carModel": "Mustang",
+      "carImage": "https://images.unsplash.com/photo-1584345604476-8ec5e12e42dd?auto=format&fit=crop&w=500",
+      "startDate": "2026-02-25",
+      "endDate": "2026-02-27",
+      "totalPrice": 260,
+      "status": "Completed",
+      "bookedAt": "2026-02-13T08:33:07.475Z"
+    },
+    {
+      "id": "13",
+      "userId": "4",
+      "carId": "12",
+      "carMake": "Nissan",
+      "carModel": "Altima",
+      "carImage": "https://images.unsplash.com/photo-1619682817481-e994891cd1f5?auto=format&fit=crop&w=500",
+      "startDate": "2026-02-14",
+      "endDate": "2026-02-15",
+      "totalPrice": 46,
+      "status": "Cancelled",
+      "bookedAt": "2026-02-13T08:34:34.288Z"
+    },
+    {
+      "id": "14",
+      "userId": "4",
+      "carId": "2",
+      "carMake": "Honda",
+      "carModel": "Civic",
+      "carImage": "https://tse3.mm.bing.net/th/id/OIP.HJTpbkZaNDKHGNh7S1BR4QAAAA?cb=defcachec2&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "startDate": "2026-02-14",
+      "endDate": "2026-02-15",
+      "totalPrice": 55,
+      "status": "Completed",
+      "bookedAt": "2026-02-13T08:50:27.661Z"
+    },
+    {
+      "id": "15",
+      "userId": "1",
+      "carId": "20",
+      "carMake": "Ducati",
+      "carModel": "Monster",
+      "carImage": "https://motofomo.com/wp-content/uploads/2022/12/Ducati-Monster-797-Studio-white-RHS-diagonal-white-1024x744.jpg",
+      "startDate": "2026-02-14",
+      "endDate": "2026-02-15",
+      "totalPrice": 90,
+      "status": "Cancelled",
+      "bookedAt": "2026-02-13T11:42:36.222Z"
+    },
+    {
+      "id": "16",
+      "userId": "4",
+      "carId": "7",
+      "carMake": "Ford",
+      "carModel": "Mustang",
+      "carImage": "https://images.unsplash.com/photo-1584345604476-8ec5e12e42dd?auto=format&fit=crop&w=500",
+      "startDate": "2026-02-18",
+      "endDate": "2026-02-19",
+      "totalPrice": 130,
+      "status": "Cancelled",
+      "bookedAt": "2026-02-15T04:53:29.375Z"
     }
   ]
 }

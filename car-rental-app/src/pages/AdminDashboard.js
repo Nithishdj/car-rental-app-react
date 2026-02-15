@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../api/axios';
-import { FaCar, FaList, FaUsers, FaPlus, FaTrash, FaCheck, FaTimes } from 'react-icons/fa';
+import { FaCar, FaList, FaUsers, FaPlus, FaTrash, FaEdit, FaCheck, FaTimes } from 'react-icons/fa';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
@@ -9,21 +9,15 @@ const AdminDashboard = () => {
   const [cars, setCars] = useState([]);
   const [bookings, setBookings] = useState([]);
   
-  // New Car Form State
-  const [showAddForm, setShowAddForm] = useState(false);
-  const [newCar, setNewCar] = useState({
-    make: '', 
-    model: '', 
-    year: 2024, 
-    category: 'Sedans',
-    pricePerDay: 50, 
-    available: true, 
-    image: '', 
-    transmission: 'Automatic', 
-    seats: 5
+  // Form State
+  const [showForm, setShowForm] = useState(false);
+  const [editingId, setEditingId] = useState(null); // Track if we are editing
+  const [formData, setFormData] = useState({
+    make: '', model: '', year: 2024, category: 'Sedans',
+    pricePerDay: 50, available: true, image: '', 
+    transmission: 'Automatic', seats: 5
   });
 
-  // Fetch Data on Component Mount
   useEffect(() => {
     fetchData();
   }, []);
@@ -50,53 +44,65 @@ const AdminDashboard = () => {
 
   // --- CAR MANAGEMENT ---
 
-  // 1. ADD CAR (Fixed ID Logic)
-  const handleAddCar = async (e) => {
+  // 1. Handle Form Input Change
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  // 2. Load Car into Form for Editing
+  const handleEditClick = (car) => {
+    setEditingId(car.id); // Set the ID we are editing
+    setFormData(car); // Fill the form with existing data
+    setShowForm(true); // Open the form
+    window.scrollTo(0, 0); // Scroll to top
+  };
+
+  // 3. Save (Create OR Update)
+  const handleSaveCar = async (e) => {
     e.preventDefault();
     try {
-      // Find the highest numerical ID currently in the list
-      const currentIds = cars.map(car => Number(car.id));
-      const nextId = currentIds.length > 0 ? Math.max(...currentIds) + 1 : 1;
+      if (editingId) {
+        // --- UPDATE EXISTING CAR ---
+        await api.put(`/cars/${editingId}`, formData);
+        
+        // Update local state
+        setCars(cars.map(c => (c.id === editingId ? formData : c)));
+        alert('Car updated successfully!');
+      } else {
+        // --- CREATE NEW CAR ---
+        const currentIds = cars.map(c => Number(c.id));
+        const nextId = currentIds.length > 0 ? Math.max(...currentIds) + 1 : 1;
+        const payload = { ...formData, id: String(nextId) };
 
-      // Create payload with the new explicit ID (as a string to match json-server preference)
-      const carPayload = { ...newCar, id: String(nextId) };
+        const res = await api.post('/cars', payload);
+        setCars([...cars, res.data]);
+        alert(`Car added successfully! (ID: ${nextId})`);
+      }
 
-      const res = await api.post('/cars', carPayload);
-      
-      // Update UI immediately
-      setCars([...cars, res.data]);
-      setShowAddForm(false);
-      
       // Reset Form
-      setNewCar({ 
+      setFormData({ 
         make: '', model: '', year: 2024, category: 'Sedans',
         pricePerDay: 50, available: true, image: '', 
         transmission: 'Automatic', seats: 5 
       });
+      setShowForm(false);
+      setEditingId(null);
       
-      alert(`Car added successfully! (ID: ${nextId})`);
     } catch (err) {
-      console.error("Add failed:", err);
-      alert('Failed to add car');
+      console.error("Save failed:", err);
+      alert('Failed to save car');
     }
   };
 
-  // 2. DELETE CAR (Fixed Comparison Logic)
+  // 4. Delete Car
   const handleDeleteCar = async (id) => {
-    if (!window.confirm(`Are you sure you want to delete car ID: ${id}?`)) {
-      return;
-    }
-
+    if (!window.confirm(`Delete car ID: ${id}?`)) return;
     try {
-      // API Call
       await api.delete(`/cars/${id}`);
-      
-      // State Update: Use loose inequality (!=) to handle String vs Number ID mismatch
-      setCars(prevCars => prevCars.filter(c => c.id != id));
-      
+      setCars(prev => prev.filter(c => c.id != id));
     } catch (err) {
-      console.error("Delete failed:", err);
-      alert('Failed to delete car. Please check console for details.');
+      alert('Failed to delete car');
     }
   };
 
@@ -104,20 +110,12 @@ const AdminDashboard = () => {
   const handleStatusChange = async (id, newStatus) => {
     try {
       await api.patch(`/bookings/${id}`, { status: newStatus });
-      
-      // Update local state
-      setBookings(prevBookings => 
-        prevBookings.map(b => b.id === id ? { ...b, status: newStatus } : b)
-      );
-    } catch (err) {
-      console.error("Status update failed:", err);
-      alert('Failed to update status');
-    }
+      setBookings(bookings.map(b => b.id === id ? { ...b, status: newStatus } : b));
+    } catch (err) { alert('Failed to update status'); }
   };
 
   return (
     <div className="admin-container">
-      {/* Sidebar */}
       <div className="admin-sidebar">
         <h2>Admin Panel</h2>
         <nav>
@@ -133,59 +131,64 @@ const AdminDashboard = () => {
         </nav>
       </div>
 
-      {/* Main Content */}
       <div className="admin-content">
         
-        {/* OVERVIEW TAB */}
+        {/* OVERVIEW */}
         {activeTab === 'overview' && (
           <div className="overview-grid">
-            <div className="stat-card">
-              <h3>Total Cars</h3>
-              <p>{cars.length}</p>
-            </div>
-            <div className="stat-card">
-              <h3>Total Bookings</h3>
-              <p>{bookings.length}</p>
-            </div>
-            <div className="stat-card">
-              <h3>Total Users</h3>
-              <p>{stats.users}</p>
-            </div>
+            <div className="stat-card"><h3>Total Cars</h3><p>{cars.length}</p></div>
+            <div className="stat-card"><h3>Total Bookings</h3><p>{bookings.length}</p></div>
+            <div className="stat-card"><h3>Total Users</h3><p>{stats.users}</p></div>
           </div>
         )}
 
-        {/* CARS TAB */}
+        {/* CARS MANAGER */}
         {activeTab === 'cars' && (
           <div className="cars-manager">
             <div className="section-header">
               <h2>Fleet Management</h2>
-              <button className="btn btn-primary" onClick={() => setShowAddForm(!showAddForm)}>
-                <FaPlus /> {showAddForm ? 'Cancel' : 'Add New Car'}
+              <button className="btn btn-primary" onClick={() => {
+                setShowForm(!showForm);
+                setEditingId(null); // Reset to "Add Mode"
+                setFormData({
+                  make: '', model: '', year: 2024, category: 'Sedans',
+                  pricePerDay: 50, available: true, image: '', 
+                  transmission: 'Automatic', seats: 5
+                });
+              }}>
+                <FaPlus /> {showForm ? 'Close Form' : 'Add New Car'}
               </button>
             </div>
 
-            {showAddForm && (
-              <form className="add-car-form" onSubmit={handleAddCar}>
+            {/* EDIT / ADD FORM */}
+            {showForm && (
+              <form className="add-car-form" onSubmit={handleSaveCar}>
+                <h3>{editingId ? 'Edit Car Details' : 'Add New Vehicle'}</h3>
                 <div className="form-grid">
-                  <input placeholder="Make (e.g. Tesla)" value={newCar.make} onChange={e => setNewCar({...newCar, make: e.target.value})} required />
-                  <input placeholder="Model (e.g. Model S)" value={newCar.model} onChange={e => setNewCar({...newCar, model: e.target.value})} required />
-                  <input placeholder="Year" type="number" value={newCar.year} onChange={e => setNewCar({...newCar, year: +e.target.value})} required />
-                  <input placeholder="Price/Day" type="number" value={newCar.pricePerDay} onChange={e => setNewCar({...newCar, pricePerDay: +e.target.value})} required />
-                  <input placeholder="Image URL" value={newCar.image} onChange={e => setNewCar({...newCar, image: e.target.value})} required />
-                  <select value={newCar.category} onChange={e => setNewCar({...newCar, category: e.target.value})}>
+                  <input name="make" placeholder="Make" value={formData.make} onChange={handleInputChange} required />
+                  <input name="model" placeholder="Model" value={formData.model} onChange={handleInputChange} required />
+                  <input name="year" type="number" placeholder="Year" value={formData.year} onChange={handleInputChange} required />
+                  <input name="pricePerDay" type="number" placeholder="Price" value={formData.pricePerDay} onChange={handleInputChange} required />
+                  <input name="image" placeholder="Image URL" value={formData.image} onChange={handleInputChange} required />
+                  
+                  {/* Category Dropdown */}
+                  <select name="category" value={formData.category} onChange={handleInputChange}>
                     <option>Compact</option>
                     <option>Sedans</option>
                     <option>SUVs</option>
                     <option>Luxury</option>
-                    <option>Sports Cars</option>
-                    <option>Vans</option>
-                    <option>Trucks</option>
+                    <option>Electric</option>
                     <option>Convertibles</option>
-                    <option>Electric/Hybrids</option>
-                    <option>Motorcycles</option>
+                  </select>
+
+                  <select name="transmission" value={formData.transmission} onChange={handleInputChange}>
+                    <option>Automatic</option>
+                    <option>Manual</option>
                   </select>
                 </div>
-                <button type="submit" className="btn btn-success">Save Car</button>
+                <button type="submit" className="btn btn-success">
+                  {editingId ? 'Update Car' : 'Save Car'}
+                </button>
               </form>
             )}
 
@@ -196,7 +199,7 @@ const AdminDashboard = () => {
                   <th>Car</th>
                   <th>Category</th>
                   <th>Price</th>
-                  <th>Action</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -207,10 +210,21 @@ const AdminDashboard = () => {
                     <td>{car.category}</td>
                     <td>${car.pricePerDay}</td>
                     <td>
+                      {/* EDIT BUTTON */}
+                      <button 
+                        className="btn-icon edit" 
+                        onClick={() => handleEditClick(car)}
+                        title="Edit"
+                        style={{ marginRight: '10px', color: '#f59e0b' }}
+                      >
+                        <FaEdit />
+                      </button>
+                      
+                      {/* DELETE BUTTON */}
                       <button 
                         className="btn-icon delete" 
                         onClick={() => handleDeleteCar(car.id)}
-                        title="Delete Car"
+                        title="Delete"
                       >
                         <FaTrash />
                       </button>
@@ -222,7 +236,7 @@ const AdminDashboard = () => {
           </div>
         )}
 
-        {/* BOOKINGS TAB */}
+        {/* BOOKINGS TAB (Existing) */}
         {activeTab === 'bookings' && (
           <div className="bookings-manager">
             <h2>Booking Management</h2>
@@ -252,8 +266,8 @@ const AdminDashboard = () => {
                     <td>
                       {b.status === 'Upcoming' && (
                         <>
-                          <button className="btn-icon success" title="Complete" onClick={() => handleStatusChange(b.id, 'Completed')}><FaCheck /></button>
-                          <button className="btn-icon danger" title="Cancel" onClick={() => handleStatusChange(b.id, 'Cancelled')}><FaTimes /></button>
+                          <button className="btn-icon success" onClick={() => handleStatusChange(b.id, 'Completed')}><FaCheck /></button>
+                          <button className="btn-icon danger" onClick={() => handleStatusChange(b.id, 'Cancelled')}><FaTimes /></button>
                         </>
                       )}
                     </td>

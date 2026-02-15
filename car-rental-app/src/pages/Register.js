@@ -18,7 +18,18 @@ const Register = () => {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    // SPECIAL LOGIC FOR PHONE: Only numbers, max 10 digits
+    if (name === 'phone') {
+      const numericValue = value.replace(/\D/g, ''); // Remove non-numbers
+      if (numericValue.length <= 10) { // Limit to 10 chars
+        setFormData({ ...formData, [name]: numericValue });
+      }
+    } else {
+      // Normal logic for other inputs (email, username, etc.)
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -85,12 +96,15 @@ const Register = () => {
           <div className="form-group">
             <label>Phone Number</label>
             <input 
-              type="tel" 
-              name="phone" 
-              value={formData.phone} 
-              onChange={handleChange} 
-              required 
-            />
+  type="tel" 
+  name="phone" 
+  placeholder="Phone Number (10 digits)"
+  value={formData.phone} 
+  onChange={handleChange} 
+  pattern="[0-9]{10}" 
+  maxLength="10" 
+  required 
+/>
           </div>
 
           <div className="form-row">
