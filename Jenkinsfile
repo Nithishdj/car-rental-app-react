@@ -17,7 +17,9 @@ pipeline {
             steps {
                 echo 'Installing required libraries...'
                 // Changed from 'sh' to 'bat' for Windows
-                bat 'npm install' 
+                   dir('car-rental-app') {
+                    bat 'npm install' 
+                } 
             }
         }
 
@@ -25,7 +27,9 @@ pipeline {
             steps {
                 echo 'Running automated tests...'
                 // Changed from 'sh' to 'bat' for Windows
-                bat 'npm test' 
+                dir('car-rental-app') {
+                    bat 'npm install' 
+                }            
             }
         }
 
@@ -33,8 +37,9 @@ pipeline {
             steps {
                 echo 'Compiling the application for production...'
                 // Changed from 'sh' to 'bat' for Windows
-                bat 'npm run build' 
-            }
+   dir('car-rental-app') {
+                    bat 'npm install' 
+                }             }
         }
 
         stage('Deploy') {
