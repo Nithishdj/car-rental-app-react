@@ -1,51 +1,51 @@
 pipeline {
     agent any 
 
-    // We will use Node.js to build our web app
     tools {
-        nodejs 'node-20' // Assumes you have NodeJS configured in Jenkins
+        nodejs 'node-20' 
     }
 
     stages {
         stage('Checkout') {
             steps {
                 echo 'Fetching the latest code from GitHub...'
-                checkout scm // This built-in command pulls your Git repository
+                checkout scm 
             }
         }
 
         stage('Install Dependencies') {
             steps {
                 echo 'Installing required libraries...'
-                // Standard command for React/Node full-stack apps
-                sh 'npm install' 
+                // Changed from 'sh' to 'bat' for Windows
+                bat 'npm install' 
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Running automated tests...'
-                sh 'npm test' 
+                // Changed from 'sh' to 'bat' for Windows
+                bat 'npm test' 
             }
         }
 
         stage('Build') {
             steps {
                 echo 'Compiling the application for production...'
-                sh 'npm run build' 
+                // Changed from 'sh' to 'bat' for Windows
+                bat 'npm run build' 
             }
         }
 
         stage('Deploy') {
             steps {
                 echo 'Simulating deployment to the web server...'
-                // In a real scenario, this pushes the 'build' folder to AWS/Azure/etc.
-                sh 'echo "Deployment successful!"' 
+                // Changed from 'sh' to 'bat' for Windows
+                bat 'echo "Deployment successful!"' 
             }
         }
     }
     
-    // This runs after all stages finish, acting as a status report
     post {
         success {
             echo 'Pipeline completed successfully! The app is live.'
